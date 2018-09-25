@@ -1,0 +1,18 @@
+console.log('Let\'s go')
+
+# check bien 
+typeof
+
+#property
+var obj = {}
+obj.name = "Loc" #property
+
+#array (kieu con cua object)
+var arr = [1, 2, 3];
+#method cua array
+arr.push() # them gia tri moi vao array
+arr.splice(0, 2)
+
+#regular expression
+
+https://regexr.com/
