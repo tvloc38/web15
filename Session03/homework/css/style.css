@@ -1,0 +1,26 @@
+.header {
+    background-color: #0000ff;
+}
+
+.nav {
+    background-color: #800080;
+    text-align: center;
+}
+
+.main {
+    background-color: #ffd700;
+    width: 75%;
+    height: 400px;
+    float: left;
+}
+
+.aside {
+    background-color: #808080;
+    width: 25%;
+    height: 400px;
+    float: right;
+}
+
+.footer {
+    background-color: #00ffff;
+}
