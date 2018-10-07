@@ -13,7 +13,7 @@ app.get('/', (req,res) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
-app.get("/web15.json", function(req, res){
+app.get("/web15", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web15")
       .then(res => {
            fs.writeFileSync("JSON/web15.json", JSON.stringify(res.data), (err) => {
@@ -27,7 +27,7 @@ app.get("/web15.json", function(req, res){
     res.sendFile(__dirname + "/JSON/web15.json");
 })
 
-app.get("/web14.json", function(req, res){
+app.get("/web14", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web14")
       .then(res => {
            fs.writeFileSync("JSON/web14.json", JSON.stringify(res.data), (err) => {
@@ -41,7 +41,7 @@ app.get("/web14.json", function(req, res){
     res.sendFile(__dirname + "/JSON/web14.json");
 })
 
-app.get("/web13.json", function(req, res){
+app.get("/web13", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web13")
       .then(res => {
            fs.writeFileSync("JSON/web13.json", JSON.stringify(res.data), (err) => {
@@ -55,7 +55,7 @@ app.get("/web13.json", function(req, res){
     res.sendFile(__dirname + "/JSON/web13.json");
 })
 
-app.get("/web12.json", function(req, res){
+app.get("/web12", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web12")
       .then(res => {
            fs.writeFileSync("JSON/web12.json", JSON.stringify(res.data), (err) => {
@@ -69,7 +69,7 @@ app.get("/web12.json", function(req, res){
     res.sendFile(__dirname + "/JSON/web12.json");
 })
 
-app.get("/web11.json", function(req, res){
+app.get("/web11", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web11")
       .then(res => {
            fs.writeFileSync("JSON/web11.json", JSON.stringify(res.data), (err) => {
@@ -83,7 +83,7 @@ app.get("/web11.json", function(req, res){
     res.sendFile(__dirname + "/JSON/web11.json");
 })
 
-app.get("/web10.json", function(req, res){
+app.get("/web10", function(req, res){
     axios.get("https://btvn-web15s.herokuapp.com/api/web10")
       .then(res => {
            fs.writeFileSync("JSON/web10.json", JSON.stringify(res.data), (err) => {
