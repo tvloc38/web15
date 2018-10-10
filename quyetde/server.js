@@ -46,7 +46,17 @@ app.get("/getQuestion", (req, res) => {
     var i = Math.floor(Math.random() * questionList.length);
 
     res.send(questionList[i].questionContent);
-})
+});
+
+app.get("/randomquestion", (req,res) => {
+    const questionList = JSON.parse(fs.readFileSync("./questions.json"));
+
+    if(questionList.length > 0) {
+        let randomIndex = Math.floor(Math.random()*questionList.length);
+        let questionRandom = questionList[randomIndex];
+        res.send(questionRandom)
+    }
+});
 
 
 app.listen(6969, (err) => {

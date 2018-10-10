@@ -15,13 +15,22 @@
 //     });
 // });
 
-const maxLength = 200;
+// const maxLength = 200;
 
-document.getElementById('textarea').addEventListener(
-    'input',
-    function() {
-        var remainChar = maxLength - document.getElementById('textarea').value.length;
-        document.getElementById('remain').innerHTML = 200 - this.value.length;
-    }
-);
+// document.getElementById('textarea').addEventListener(
+//     'input',
+//     function() {
+//         var remainChar = maxLength - document.getElementById('textarea').value.length;
+//         document.getElementById('remain').innerHTML = 200 - this.value.length;
+//     }
+// );
+
+axios.get('http://localhost:6969/randomquestion')
+.then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
 
