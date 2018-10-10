@@ -28,6 +28,9 @@
 axios.get('http://localhost:6969/randomquestion')
 .then(function (response) {
     console.log(response.data);
+    if (response.data) {
+        document.getElementById('questionContent').innerText = response.data.questionContent;
+    }
   })
   .catch(function (error) {
     console.log(error);
