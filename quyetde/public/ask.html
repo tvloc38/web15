@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <title>Hoi nhanh</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/ask">Hoi nhanh</a></li>
+            <li><a href="/answer">Dap gon</a></li>
+        </ul>
+    </nav>
+    <div>
+        <h1>Hay hoi cong dong mot cau hoi dung/sai hoac co/khong</h1>
+        <form action="/createquestion" method="POST">
+            <textarea name="questionContent" id="textarea" cols="30" rows="10" maxlength='200'></textarea>
+            <span>Con <span id="remain">200</span>/200 ki tu</span>
+            <!-- <span id="count">Con 200/200 ki tu</span> -->
+            <input type="submit" value="Gui">
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
