@@ -64,29 +64,39 @@ app.get("/randomquestion", (req,res) => {
 
 app.post('/answer', (req,res) => {
     console.log(req.body);
-    const { questionid, answer } = req.body;
+    const { questionId, answer } = req.body;
     // const questionid = req.body.questionid;
     // const answer = req.body.answer;
     const questionList = JSON.parse(fs.readFileSync("./questions.json"));
     
-    questionList[questionid][answer] += 1;
+    questionList[questionId][answer] += 1;
 
     fs.writeFileSync('./questions.json', JSON.stringify(questionList));
     res.send({ success: 1});
 });
 
 
-app.post("/result", (req, res) => {
-    console.log(req.body);
-    const currentQuestionId = req.body.questionId;
-    const questionList = JSON.parse(fs.readFileSync("./questions.json"));
-    fs.writeFileSync("./result.json", JSON.stringify(questionList[currentQuestionId]));
-    res.send({success: 1});
+// app.post("/result", (req, res) => {
+//     console.log(req.body);
+//     const currentQuestionId = req.body.questionId;
+//     const questionList = JSON.parse(fs.readFileSync("./questions.json"));
+//     fs.writeFileSync("./result.json", JSON.stringify(questionList[currentQuestionId]));
+//     res.send({success: 1});
+// })
+
+// app.get("/current", (req, res) => {
+//     var currentQuestion = JSON.parse(fs.readFileSync("./result.json"));
+//     res.send(currentQuestion);
+// })
+
+app.get('/question/:questionId', (req,res) => {
+    res.sendFile(__dirname + "/public/result.html");
 })
 
-app.get("/current", (req, res) => {
-    var currentQuestion = JSON.parse(fs.readFileSync("./result.json"));
-    res.send(currentQuestion);
+app.get('/questiondetail/:questionId', (req,res) => {
+    let questionId = req.params.questionId;
+    let questionList = JSON.parse(fs.readFileSync("./questions.json"));
+    res.send({success: 1, question: questionList[questionId]})
 })
 
 

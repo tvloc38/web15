@@ -37,7 +37,8 @@ function getRandomQuestion() {
         console.log(response);
         $('#questionContent').text(response.questionContent);
         $(".answer_btn").data("questionId", response.id);
-        $("#result").data("questionId", response.id);
+        // $("#result").data("questionId", response.id);
+        $('#result').attr("href", "/question/"+response.id)
       }
     },
     error: function(err) {
@@ -67,19 +68,19 @@ $('.answer_btn').on("click", function() {
   });
 });
 
-$("#result").on("click", function(){
-  console.log($(this).data());
-  $.ajax({
-      url: "http://localhost:6969/result",
-      type: "POST",
-      data: $(this).data(),
-      success: function(response){
-          if(response.success){
-              window.location.href="/result";
-          }
-      },
-      error: function(err){
-          console.log(err);
-      }
-  })
-})
+// $("#result").on("click", function(){
+//   console.log($(this).data());
+//   $.ajax({
+//       url: "http://localhost:6969/result",
+//       type: "POST",
+//       data: $(this).data(),
+//       success: function(response){
+//           if(response.success){
+//               window.location.href="/result";
+//           }
+//       },
+//       error: function(err){
+//           console.log(err);
+//       }
+//   })
+// })
