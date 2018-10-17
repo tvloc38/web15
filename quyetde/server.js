@@ -1,6 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const mongoose = require('mongoose');
+
+const QuestionModel = require("./models/questionModel");
+
+mongoose.connect("mongodb://localhost/quyetde", (err) => {
+    if (err) console.log(err)
+    else console.log("DB connect success!")
+})
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,15 +41,29 @@ app.post('/createquestion', (req,res) => {
     const questionList = JSON.parse(fs.readFileSync('./questions.json'));
     console.log(questionList.length);
 
-    const newQuestion = {
-        id: questionList.length,
-        questionContent: req.body.questionContent,
-        yes: 0,
-        no: 0
-    }
+    // const newQuestion = {
+    //     id: questionList.length,
+    //     questionContent: req.body.questionContent,
+    //     yes: 0,
+    //     no: 0
+    // }
 
-    questionList.push(newQuestion);
-    fs.writeFileSync('./questions.json', JSON.stringify(questionList));
+    // const newQuestion = new QuestionModel({
+    //     questionContent: req.body.questionContent,
+    // })
+
+    // newQuestion.save();
+
+    QuestionModel.create(
+        { questionContent: req.body.questionContent },
+        (err, questionCreate) => {
+            if(err) console.log(err)
+            else res.redirect('/question/'+questionCreated._id);
+        }
+    )
+
+    // questionList.push(newQuestion);
+    // fs.writeFileSync('./questions.json', JSON.stringify(questionList));
 
     res.redirect('/answer');
 });
@@ -53,6 +76,7 @@ app.post('/createquestion', (req,res) => {
 // });
 
 app.get("/randomquestion", (req,res) => {
+    // findOne
     const questionList = JSON.parse(fs.readFileSync("./questions.json"));
 
     if(questionList.length > 0) {
@@ -63,6 +87,8 @@ app.get("/randomquestion", (req,res) => {
 });
 
 app.post('/answer', (req,res) => {
+    // find..AndUpdate
+    // find -> save
     console.log(req.body);
     const { questionId, answer } = req.body;
     // const questionid = req.body.questionid;

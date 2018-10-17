@@ -53,13 +53,14 @@ function getRandomQuestion() {
 
 $('.answer_btn').on("click", function() {
   console.log($(this).data());
+  let questionId = $(this).data("questionid")
   $.ajax({
     url: 'http://localhost:6969/answer',
     type: "POST",
     data: $(this).data(),
     success: function(response) {
       if(response.success) {
-        window.location.href = "/";
+        window.location.href = "/question/"+questionId;
       }
     },
     error: function(err) {
