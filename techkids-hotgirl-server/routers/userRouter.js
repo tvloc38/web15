@@ -12,10 +12,25 @@ UserRouter.use((req, res, next) => {
 // "*/api/users" => get all
 UserRouter.get("/", (req, res) => {
     console.log("Get all user");
-    UserModel.find({}, "name email avatar intro", (err, users) => {
-        if (err) res.status(500).json({ success: 0, error: err })
-        else res.status(201).json({ success: 1, users});
-    });
+    // async await
+    try {
+        const users = await UserModel.find({}, "name email avatar intro").populate("posts");
+        res.json({success: 1, users});
+    } catch (error) {
+        res.status(500).json({success: 0, error: err})
+    }
+    // UserModel.find({}, "name email avatar intro")
+    //     .populate("posts")
+
+        // promise
+        // .then(users => res.json({success: 1, users}))
+        // .catch(err => res.status(500).json({success: 0, error: err}))
+
+        // binh thuong
+        // .exec((err, users) => {
+        //     if (err) res.status(500).json({ success: 0, error: err })
+        //     else res.status(201).json({ success: 1, users});
+        // });
 });
 
 // "*/api/users" => get user by id
@@ -40,7 +55,7 @@ UserRouter.post("/", (req, res) => {
 // edit user
 UserRouter.put("/:id", (req, res) => {
     let userId = req.params.id;
-    const { name, password, avatar, intro } = req.body;
+    const { name, password, avatar, intro, posts } = req.body;
     
     
     // UserModel.findByIdAndUpdate(userId, { name, password, avatar, intro }, {new: true}, (err, userUpdated) => {
@@ -50,9 +65,9 @@ UserRouter.put("/:id", (req, res) => {
 
     UserModel.findById(userId, (err, userFound) => {
         if(err) res.status(500).json({ success: 0, message: err})
-        else if(!userFound._id) res.status(404).json({ success: 0, message: "Not Found"})
+        else if(!userFound) res.status(404).json({ success: 0, message: "Not Found"})
         else {
-            for(key in { name, password, avatar, intro }) {
+            for(key in { name, password, avatar, intro, posts }) {
                 if (userFound[key] && req.body[key]) userFound[key] = req.body[key];            
             }
             // userFound.name = name || userFound.name;
